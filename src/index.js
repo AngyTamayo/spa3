@@ -6,21 +6,8 @@ const cors = require('cors');
 
 
 const app = express();
-const db = mysql.createPool({
-    host: 'bbeklyahu1tio0aq0fik-mysql.services.clever-cloud.com',
-    user: 'uzq0scqew0q9q6qt',
-    password:'QfNNd6iowpdPe9xx40Cw',
-    database: 'bbeklyahu1tio0aq0fik',
-});
+
 app.use(bodyParser.urlencoded({extended: true}))
-
-app.post('/api/insert', (req,res)=>{
-    const sqlInsert =
-     "insert into usuario (nombre, correo) values (?,?)";
-    db.query(sqlInsert, [nombre,correo], (err, result) => {});
-    });
-
-
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
