@@ -1,24 +1,26 @@
 const express = require('express');
-const bodyParser = require('body-parser')
 const morgan = require('morgan');
-const mysql = require('mysql')
 const cors = require('cors');
+const path= require('path');
+const bodyParser = require('body-parser');
 
-
+//inicio 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(morgan('dev'));
+//configuraciones
+app.set('port',process.env.PORT || 4000);
 
-
-const PORT = process.env.PORT || 3000;
-
+//variables globales 
 app.use((req, res, next)=>{
     next();
 });
+
+//peticiones 
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}))
 
 const usuario = require('./routes/usuario');
 app.use("/usuarios",usuario);
@@ -55,8 +57,9 @@ const { database } = require('./keys');
 app.use("/empleados",empleado);
 
 
-
-
-app.listen(PORT, () => {
-    console.log("localhost:" + PORT);
-})
+//public 
+app.unsubscribe(express.static(path.join(__dirname,'public')));
+//iniciar el servidor 
+app.listen(app.get('port'),()=>{
+    console.log('servidor conectado en puerto:',app.get('port'));
+});

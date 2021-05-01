@@ -1,0 +1,20 @@
+.contenedor
+{
+  width: 100%;
+  height: auto;
+  display: flex !important;
+  flex-wrap: wrap;
+}
+
+.card {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#boton {
+    margin-left: 1120px;
+}
+
+#titulo{
+    margin-left: 150px;
+}
